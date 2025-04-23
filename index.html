@@ -647,6 +647,17 @@
         document.querySelectorAll('.guitar-card').forEach(card => {
             observer.observe(card);
         });
+    
+  document.getElementById('twitter-link').addEventListener('click', function(e) {
+      e.preventDefault(); // Не переходить по ссылке
+      gtag('event', 'social_click', {
+          'platform': 'twitter',
+          'link_text': 'Twitter'
+      });
+      // Здесь можно добавить переход по настоящей ссылке, если нужно
+      window.open('https://twitter.com/yourprofile', '_blank');
+  });
+
     </script>
 </body>
 </html>
