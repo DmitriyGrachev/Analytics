@@ -486,189 +486,98 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Event tracking script -->
     <script>
-        // Track navigation clicks
-        document.getElementById('home-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'navigation_click', {
-                'link_id': 'home',
-                'link_text': 'Home'
-            });
-        });
-        
-        document.getElementById('guitars-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'navigation_click', {
-                'link_id': 'guitars',
-                'link_text': 'Guitars'
-            });
-            document.getElementById('guitars').scrollIntoView({behavior: 'smooth'});
-        });
-        
-        document.getElementById('lessons-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'navigation_click', {
-                'link_id': 'lessons',
-                'link_text': 'Lessons'
-            });
-            document.getElementById('lessons').scrollIntoView({behavior: 'smooth'});
-        });
-        
-        document.getElementById('gear-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'navigation_click', {
-                'link_id': 'gear',
-                'link_text': 'Gear'
-            });
-            document.getElementById('gear').scrollIntoView({behavior: 'smooth'});
-        });
-        
-        document.getElementById('contact-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'navigation_click', {
-                'link_id': 'contact',
-                'link_text': 'Contact'
-            });
-            document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
-        });
-        
-        // Track main CTA button clicks
-        document.getElementById('explore-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'button_click', {
-                'button_id': 'explore_guitars',
-                'button_text': 'Explore Guitars'
-            });
-            document.getElementById('guitars').scrollIntoView({behavior: 'smooth'});
-        });
-        
-        // Track guitar cards interaction
-        document.getElementById('acoustic-details-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'guitar_details_click', {
-                'guitar_type': 'acoustic',
-                'guitar_name': 'Dreadnought Classics'
-            });
-        });
-        
-        document.getElementById('electric-details-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'guitar_details_click', {
-                'guitar_type': 'electric',
-                'guitar_name': 'Modern Stratocaster'
-            });
-        });
-        
-        document.getElementById('classical-details-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'guitar_details_click', {
-                'guitar_type': 'classical',
-                'guitar_name': 'Spanish Nylon'
-            });
-        });
-        
-        // Track lessons button interaction
-        document.getElementById('lessons-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'button_click', {
-                'button_id': 'browse_lessons',
-                'button_text': 'Browse Lessons'
-            });
-        });
-        
-        // Track gear guide button interaction
-        document.getElementById('gear-guide-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'button_click', {
-                'button_id': 'gear_guide',
-                'button_text': 'Full Gear Guide'
-            });
-        });
-        
-        // Track form submission
-        document.getElementById('submit-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Capture form data (in a real site, you'd validate and process this)
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            
-            gtag('event', 'form_submission', {
-                'form_id': 'contact_form',
-                'form_name': 'Contact Form',
-                'has_name': name.length > 0,
-                'has_email': email.length > 0,
-                'has_subject': subject.length > 0
-            });
-            
-            // Show a thank you message (in a real site)
-            alert('Thank you for your message! This is a demo site, so no message was actually sent.');
-        });
-        
-        // Track social media link clicks
-        document.getElementById('facebook-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'social_click', {
-                'platform': 'facebook'
-            });
-        });
-        
-        document.getElementById('instagram-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'social_click', {
-                'platform': 'instagram'
-            });
-        });
-        
-        document.getElementById('youtube-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'social_click', {
-                'platform': 'youtube'
-            });
-        });
-        
-        document.getElementById('twitter-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            gtag('event', 'social_click', {
-                'platform': 'twitter'
-            });
-        });
-        
-        // Track guitar card views using Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const cardId = entry.target.id;
-                    let guitarType = '';
-                    
-                    if (cardId === 'acoustic-card') guitarType = 'acoustic';
-                    else if (cardId === 'electric-card') guitarType = 'electric';
-                    else if (cardId === 'classical-card') guitarType = 'classical';
-                    
-                    gtag('event', 'guitar_card_view', {
-                        'guitar_type': guitarType
-                    });
-                    
-                    // Unobserve after first view to prevent multiple triggers
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {threshold: 0.7}); // 70% of the element must be visible
-        
-        // Observe all guitar cards
-        document.querySelectorAll('.guitar-card').forEach(card => {
-            observer.observe(card);
-        });
-    
-  document.getElementById('twitter-link').addEventListener('click', function(e) {
-      e.preventDefault(); // Не переходить по ссылке
-      gtag('event', 'social_click', {
-          'platform': 'twitter',
-          'link_text': 'Twitter'
-      });
-      // Здесь можно добавить переход по настоящей ссылке, если нужно
-      window.open('https://twitter.com/yourprofile', '_blank');
-  });
+// Функція для генерації унікального ID
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 
-    </script>
+// Функція для отримання cookie
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+    return null;
+}
+
+// Функція для встановлення cookie
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+// Перевірка та створення user_id
+var userId = getCookie('user_id');
+if (!userId) {
+    userId = generateUUID();
+    setCookie('user_id', userId, 30); // Зберігати cookie 30 днів
+}
+
+// Передача user_id у dataLayer
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+    'userId': userId
+});
+
+// Функція для видалення cookie (для "виходу")
+function deleteCookie(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+}
+
+// Додавання обробника для тестової кнопки "Вийти"
+document.addEventListener('DOMContentLoaded', function() {
+    var logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            deleteCookie('user_id');
+            window.dataLayer.push({
+                'userId': null,
+                'event': 'logout'
+            });
+            alert('User logged out (cookie cleared). Refresh to generate new user_id.');
+        });
+    }
+});
+
+// Перенесені події (без gtag, оскільки вони будуть у GTM)
+document.getElementById('submit-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Thank you for your message! This is a demo site, so no message was actually sent.');
+});
+
+// Прокрутка для навігаційних посилань
+document.getElementById('guitars-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('guitars').scrollIntoView({behavior: 'smooth'});
+});
+
+document.getElementById('lessons-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('lessons').scrollIntoView({behavior: 'smooth'});
+});
+
+document.getElementById('gear-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('gear').scrollIntoView({behavior: 'smooth'});
+});
+
+document.getElementById('contact-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+});
+
+document.getElementById('explore-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('guitars').scrollIntoView({behavior: 'smooth'});
+});
+</script>
 </body>
 </html>
