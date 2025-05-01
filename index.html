@@ -9,22 +9,17 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSBW2935K4"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-    'userId': userId,
-    'site_category': 'guitar_resource' // Статичний параметр
-});
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NSBW2935K4');
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NSBW2935K4');
 </script>
-    <!-- Google Tag Manager -->
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K8X2V82M');</script>
+<!-- End Google Tag Manager -->
 <!-- End Google Tag Manager -->
     <style>
         * {
@@ -526,10 +521,11 @@ if (!userId) {
     setCookie('user_id', userId, 30); // Зберігати cookie 30 днів
 }
 
-// Передача user_id у dataLayer
+// Передача user_id та site_category у dataLayer
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
-    'userId': userId
+    'userId': userId,
+    'site_category': 'guitar_resource' // Статичний параметр
 });
 
 // Функція для видалення cookie (для "виходу")
