@@ -548,7 +548,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+// Відстеження кліків на кнопки деталей гітар
+document.getElementById('acoustic-details-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({
+        'event': 'view_guitar_details',
+        'guitar_type': 'acoustic',
+        'guitar_price': 299.99 // Умовна ціна
+    });
+});
 
+document.getElementById('electric-details-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({
+        'event': 'view_guitar_details',
+        'guitar_type': 'electric',
+        'guitar_price': 499.99 // Умовна ціна
+    });
+});
+
+document.getElementById('classical-details-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({
+        'event': 'view_guitar_details',
+        'guitar_type': 'classical',
+        'guitar_price': 199.99 // Умовна ціна
+    });
+});
 // Перенесені події (без gtag, оскільки вони будуть у GTM)
 document.getElementById('submit-btn').addEventListener('click', function(e) {
     e.preventDefault();
