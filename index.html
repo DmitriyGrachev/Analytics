@@ -575,6 +575,17 @@ document.getElementById('classical-details-btn').addEventListener('click', funct
         'guitar_price': 199.99 // Умовна ціна
     });
 });
+        // Відстеження відправлення форми
+document.getElementById('submit-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    var subject = document.getElementById('subject').value || 'no_subject';
+    window.dataLayer.push({
+        'event': 'form_submission',
+        'form_subject': subject,
+        'page_location': window.location.href
+    });
+    alert('Thank you for your message! This is a demo site, so no message was actually sent.');
+});
 // Перенесені події (без gtag, оскільки вони будуть у GTM)
 document.getElementById('submit-btn').addEventListener('click', function(e) {
     e.preventDefault();
